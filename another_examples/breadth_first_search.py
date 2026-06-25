@@ -14,7 +14,7 @@ def find_path(
     # com custo de busca otimizado O(1) -> tempo constante
 
     fila = deque([(start, [start])]) # Essa fila serve para guardar o nó atual e o caminho
-    # até ele.
+    # até ele na ordem de chegada (FIFO).
 
     while fila: # Esse while serve para verificar cada intersection e seus vizinhos
         # até chegar no goal
