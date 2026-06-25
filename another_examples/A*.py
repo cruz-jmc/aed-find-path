@@ -1,5 +1,4 @@
 from data_structures.city_map import CityMap
-from collections import deque
 from another_examples.funcao_heuristica import heuristica
 import heapq
 

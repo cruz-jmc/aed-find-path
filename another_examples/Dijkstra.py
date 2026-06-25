@@ -1,5 +1,4 @@
 from data_structures.city_map import CityMap
-from collections import deque
 # Uma obs: O Dijkstra não usa a heurística percorrendo em inundação
 import heapq
 
