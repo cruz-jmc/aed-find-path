@@ -1,5 +1,5 @@
 from data_structures.city_map import CityMap
-# Uma obs: O Dijkstra não usa a heurística percorrendo em inundação
+# Uma obs: O Dijkstra não usa deque já que usa a biblioteca heapq
 import heapq
 
 def find_path(
@@ -12,11 +12,10 @@ def find_path(
         return [start]
 
     melhor_custo_gx = {start: 0.0} # Definimos o melhor caminho inicial que seria o próprio start
-    # No Dijkstra, usamos esse dicionário para guardar o menor custo g(x) conhecido até cada nó.
+    # Mudamos agora de conjuntos(visitados) para dicionário porque no A* e Dijkstra não precisamos apenas
+    # saber se um nó foi visitado, mas sim qual foi o menor custo g(x) para chegar até ele.
 
-    fila = [] # a fila continua sendo uma fila de prioridades gerenciada pelo heapq.
-
-    # No Dijkstra não calculamos nenhuma estimativa inicial.
+    fila = [] # a fila é uma lista de prioridades gerenciada pelo heapq.
 
     # A prioridade na fila passa a ser apenas o custo real inicial (0.0)
     # Mudamos a tupla para colocar o custo real acumulado na frente: (custo_gx, nó_atual, caminho_percorrido)
@@ -24,9 +23,9 @@ def find_path(
 
     while fila: # Esse while serve para verificar cada intersection e seus vizinhos até chegar no goal
         
-        # Removemos a variável custo_total (f(x)), pois agora ordenamos apenas por custo_gx (g(x))
+        # Ordenamos apenas por custo_gx (g(x))
         custo_gx, intersection_atual, road_atual = heapq.heappop(fila) 
-        # Remove e retorna a interseção que tem o MENOR custo acumulado real g(x) até agora (heapq).
+        # Remove e retorna a interseção que tem o MENOR custo acumulado real g(x) até agora (o mais a direita).
 
         if intersection_atual == goal:
             return road_atual
@@ -35,7 +34,7 @@ def find_path(
             continue
 
         for vizinho in city_map.roads[intersection_atual]:
-            novo_custo_gx = custo_gx + 1.0
+            novo_custo_gx = custo_gx + 1.0 # como se movesse mais 1 caminho de peso 1
 
             if novo_custo_gx < melhor_custo_gx.get(vizinho, float('inf')): # Verifica se esse novo caminho até o vizinho é mais curto.
 

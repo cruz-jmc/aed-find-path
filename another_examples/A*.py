@@ -13,7 +13,7 @@ def find_path(
 
     melhor_custo_gx = {start: 0.0} # Definimos o melhor caminho inicial que seria o próprio start
     # Mudamos agora de conjuntos(visitados) para dicionário porque no A* não precisamos apenas
-    # saber se um nó foi visitado, mas sim qual foi o menor custo g(x) para chegar até ele.
+    # saber se um nó foi visitado, mas sim qual foi o menor custo g(x) para chegar até ele assim como em Dijkstra.
 
     fila = [] # a fila agora virou uma lista porque o módulo `heapq` transforma uma lista comum do Python
     # em uma Fila de Prioridades (Min-Heap), onde os elementos são ordenados automaticamente pelo menor custo.
@@ -22,7 +22,7 @@ def find_path(
     # Definimos o valor da função Heurística inicial começando pelo start
 
     heapq.heappush(fila, (funcao_h_inicial, 0.0, start, [start]))
-    # Nós salvamos uma tupla com 4 informações: (custo_total, custo_g, nó_atual, caminho_percorrido)
+    # Nós salvamos uma tupla com 4 informações: (custo_total, custo_gx, nó_atual, caminho_percorrido)
     # O heapq sempre deixará no topo quem tiver o menor custo_total (que é o primeiro item da tupla)
 
     while fila: # Esse while serve para verificar cada intersection e seus vizinhos
